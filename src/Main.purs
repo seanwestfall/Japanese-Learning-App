@@ -44,3 +44,10 @@ table :: forall props eff. T.Spec eff TaskListState props TaskListAction -> T.Sp
                               ] <> render dispatch p s c
                  ]
        ]
+
+main :: forall e. Eff (dom :: DOM, console :: CONSOLE | e) Unit
+main = do
+  doc <- getDocument
+  content <- unsafeFromJust <$> getElementById' "content" doc
+  setInnerHTML ("<h1>" <> greetingWords <> "</h1>") content
+  log greetingWords
